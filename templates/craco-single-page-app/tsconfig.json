@@ -1,5 +1,0 @@
-{
-  "extends": "@turbo-tutorial/tsconfig/craco.json",
-  "include": ["src"],
-  "exclude": ["node_modules"]
-}

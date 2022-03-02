@@ -6,7 +6,6 @@
   "files": [
     "nextjs.json",
     "vitejs.json",
-    "craco.json",
     "react-library.json"
   ]
 }

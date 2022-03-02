@@ -1,5 +1,0 @@
-{
-  "home": "./pages/home.tsx",
-  "about": "./pages/about.tsx",
-  "support": "./pages/support.tsx"
-}
