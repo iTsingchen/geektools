@@ -1,6 +1,7 @@
 import path from "path";
 import { defineConfig as officialDefineConfig } from "windicss/helpers";
 import { ExtractOptions } from "windicss/types/interfaces";
+import daisyui from "daisyui";
 
 const uniqueElements = <T>(arr: T[]) => [...new Set(arr)];
 const makeExtractOptions = (customOptions: ExtractOptions) => {
@@ -37,5 +38,6 @@ export const defineConfig = (extractOptions: ExtractOptions) => {
      * plugins: [formsPlugin],
      *
      */
+    plugins: [daisyui],
   });
 };
