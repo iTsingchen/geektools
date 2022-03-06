@@ -1,5 +1,5 @@
 {
-  "name": "learn-graphql",
+  "name": "vite-react-app",
   "version": "0.0.1",
   "scripts": {
     "dev": "vite",

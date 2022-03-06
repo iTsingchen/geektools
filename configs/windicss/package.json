@@ -7,7 +7,6 @@
     "index.ts"
   ],
   "dependencies": {
-    "windicss": "^3.4.2",
-    "daisyui": "^2.4.0"
+    "windicss": "^3.4.2"
   }
 }
