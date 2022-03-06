@@ -15,9 +15,7 @@ export default defineConfig({
       devOptions: {
         enabled: process.env.NODE_ENV === "development",
         type: "module",
-        navigateFallback: "/",
       },
-      workbox: {},
     }),
   ],
 });

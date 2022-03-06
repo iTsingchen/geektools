@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Plus } from "phosphor-react";
+import { PlusIcon } from "@heroicons/react/solid";
 
 import { CREATE_TODO } from "./todo.graphql";
 
@@ -23,7 +23,7 @@ export function FormInput() {
         className="input input-bordered grow"
       />
       <button type="submit" disabled={text.length < 2} className="btn ml-4">
-        <Plus size={32} />
+        <PlusIcon width={32} />
       </button>
     </form>
   );

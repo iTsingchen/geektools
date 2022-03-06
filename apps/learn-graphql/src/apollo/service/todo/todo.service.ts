@@ -1,11 +1,12 @@
 import { nanoid } from "nanoid";
 import { isBefore } from "date-fns";
-import { createInstance } from "localforage";
+
+import localforage from "localforage/src/localforage";
 
 import { Todo } from "./todo.interface";
 
 export class TodoService {
-  private model = createInstance({
+  private model = localforage.createInstance({
     name: "todos",
     description: "This is a todo list",
   });
