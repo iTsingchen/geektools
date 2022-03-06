@@ -4073,11 +4073,6 @@ randombytes@^2.1.0:
   dependencies:
     safe-buffer "^5.1.0"
 
-react-content-loader@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-6.1.0.tgz#6b06be3889d2480ae909be0374a6062a36a53dec"
-  integrity sha512-S4/+doQrNs0PGDgUYCGGfdFjGax8dMQzYkWcSSxfaUcUjFkbnikWARuX9lWkglocIVhxnn3lxNb6uEWFFUzNUw==
-
 react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
@@ -4494,6 +4489,11 @@ spdx-license-ids@^3.0.0:
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.11.tgz#50c0d8c40a14ec1bf449bae69a0ea4685a9d9f95"
   integrity sha512-Ctl2BrFiM0X3MANYgj3CkygxhRmr9mi6xhejbdO960nF6EDJApTYpn0BQnDKlnNBULKiCN1n3w9EBkHK8ZWg+g==
+
+spinners-react@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/spinners-react/-/spinners-react-1.0.6.tgz#b7e43d6097fa30107718df718108f3586d50088f"
+  integrity sha512-5J3sPZ9xogVA3CbLjFD3vTWhcuHb+mKFSBBEm5c8+8JSdPGweLQ6sPU+SD51FwZ2lqHks8DpiLk/lyLUa70oJA==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
