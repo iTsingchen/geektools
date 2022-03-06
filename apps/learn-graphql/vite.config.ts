@@ -1,8 +1,23 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import WindiCSS from "vite-plugin-windicss";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), WindiCSS()],
+  plugins: [
+    react(),
+    VitePWA({
+      manifest: false,
+      strategies: "injectManifest",
+      registerType: "autoUpdate",
+      srcDir: "src",
+      filename: "sw.ts",
+      devOptions: {
+        enabled: process.env.NODE_ENV === "development",
+        type: "module",
+        navigateFallback: "/",
+      },
+      workbox: {},
+    }),
+  ],
 });

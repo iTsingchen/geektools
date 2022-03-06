@@ -1,5 +1,0 @@
-{
-  "extends": "@turbo-tutorial/tsconfig/nextjs.json",
-  "include": ["next-env.d.ts", "pages"],
-  "exclude": ["node_modules"]
-}
