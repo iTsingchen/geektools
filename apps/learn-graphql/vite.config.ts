@@ -13,11 +13,9 @@ export default defineConfig({
       srcDir: "src",
       filename: "sw.ts",
       devOptions: {
-        enabled: process.env.NODE_ENV === "development",
+        enabled: process.env.NODE_ENV === "development" || true,
         type: "module",
-        navigateFallback: "/",
       },
-      workbox: {},
     }),
   ],
 });

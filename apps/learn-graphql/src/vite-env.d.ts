@@ -23,3 +23,10 @@ declare module "virtual:pwa-register" {
     options?: RegisterSWOptions
   ): (reloadPage?: boolean) => Promise<void>;
 }
+
+// Fix build error
+declare module "localforage/src/localforage" {
+  import localforage from "localforage";
+
+  export default localforage;
+}

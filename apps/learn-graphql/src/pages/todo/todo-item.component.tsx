@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { X } from "phosphor-react";
+import { XIcon } from "@heroicons/react/solid";
 
 import { Todo } from "../../apollo";
 import { DELETE_TODO, TOGGLE_TODO } from "./todo.graphql";
@@ -31,7 +31,7 @@ export function TodoItem({ id, text, done }: Todo) {
         className="mr-2 opacity-0 group-hover:opacity-30 transition duration-500"
         onClick={() => deleteTodo()}
       >
-        <X size={24} />
+        <XIcon width={24} />
       </button>
     </p>
   );
