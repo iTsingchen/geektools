@@ -1,37 +1,58 @@
 import { nanoid } from "nanoid";
+import { isBefore } from "date-fns";
+import { createInstance } from "localforage";
 
-import { Todo } from "./todo.type";
+import { Todo } from "./todo.interface";
 
 export class TodoService {
-  private todos: Todo[] = [];
+  private model = createInstance({
+    name: "todos",
+    description: "This is a todo list",
+  });
 
-  findAll() {
-    return this.todos;
+  async findOne(id: string): Promise<Todo> {
+    const todo = await this.model.getItem<Todo>(id);
+    if (!todo) throw new Error(`Todo not found by id: ${id}`);
+    return todo;
   }
 
-  create(text: string): Todo {
+  async findAll(): Promise<Todo[]> {
+    const todos: Todo[] = [];
+    await this.model.iterate<Todo, unknown>((value) => {
+      todos.push(value);
+    });
+    todos.sort((t1, t2) => (isBefore(t1.createdAt, t2.createdAt) ? 1 : -1));
+
+    return todos;
+  }
+
+  async create(text: string): Promise<Todo> {
+    const id = nanoid();
     const todo = {
-      id: nanoid(),
+      id,
       text,
-      completed: false,
+      done: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
-    this.todos.push(todo);
+
+    await this.model.setItem(id, todo);
 
     return todo;
   }
 
-  toggle(id: string): Todo {
-    const todo = this.todos.find((item) => item.id === id);
-    if (!todo) throw new Error(`Todo not found by id: ${id}`);
-    todo.completed = !todo.completed;
+  async toggle(id: string): Promise<Todo> {
+    const todo = await this.findOne(id);
+    todo.done = !todo.done;
+    todo.updatedAt = new Date();
+    await this.model.setItem(id, todo);
 
     return todo;
   }
 
-  delete(id: string): Todo {
-    const todo = this.todos.find((item) => item.id === id);
-    if (!todo) throw new Error(`Todo not found by id: ${id}`);
-    this.todos = this.todos.filter((item) => item.id !== id);
+  async delete(id: string): Promise<Todo> {
+    const todo = await this.findOne(id);
+    await this.model.removeItem(id);
 
     return todo;
   }

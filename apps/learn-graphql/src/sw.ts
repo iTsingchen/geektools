@@ -1,24 +1,39 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-underscore-dangle */
-
 import { precacheAndRoute, cleanupOutdatedCaches } from "workbox-precaching";
 import { clientsClaim } from "workbox-core";
 import { registerRoute } from "workbox-routing";
 
+import { PINT_PONG, PING, PONG } from "./utils/ping-pong";
 import { apolloService } from "./apollo/service/apollo-service";
 
 declare let self: ServiceWorkerGlobalScope;
 
-// self.__WB_MANIFEST is default injection point
-precacheAndRoute(self.__WB_MANIFEST);
+async function bootstrap() {
+  // self.__WB_MANIFEST is default injection point
+  // eslint-disable-next-line no-underscore-dangle
+  precacheAndRoute(self.__WB_MANIFEST);
 
-// clean old assets
-cleanupOutdatedCaches();
+  // clean old assets
+  cleanupOutdatedCaches();
 
-// register route
-registerRoute("/graphql", apolloService.fetch, "POST");
+  // register route
+  registerRoute("/graphql", apolloService.fetch, "POST");
 
-// claim
-self.skipWaiting();
-clientsClaim();
+  // ping pong
+  const broadcast = new BroadcastChannel(PINT_PONG);
+  broadcast.addEventListener(
+    "message",
+    (event: MessageEvent<{ type: typeof PING }>) => {
+      if (event.data && event.data.type === PING) {
+        broadcast.postMessage({ type: PONG });
+      }
+    }
+  );
+
+  // immediate effect
+  await self.skipWaiting();
+  clientsClaim();
+}
+
+bootstrap().catch((e) => {
+  throw e;
+});

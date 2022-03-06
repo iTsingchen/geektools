@@ -1,1 +1,1 @@
-export type { Todo } from "./todo/todo.type";
+export type { Todo } from "./todo/todo.interface";

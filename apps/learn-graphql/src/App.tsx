@@ -1,14 +1,17 @@
 import { ApolloProvider } from "@apollo/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { client } from "./apollo";
-import { TodoList } from "./todo-list";
+import { TodoPage } from "./pages/todo";
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div className="bg-neutral">
-        <TodoList />
-      </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<TodoPage />} />
+        </Routes>
+      </Router>
     </ApolloProvider>
   );
 }
