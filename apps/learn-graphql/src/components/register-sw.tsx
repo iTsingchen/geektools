@@ -10,17 +10,22 @@ type Props = {
 };
 
 export function RegisterSW({ ms, children }: Props) {
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   useLayoutEffect(() => {
     const run = async () => {
       registerSW({ immediate: true });
       await pingServiceWorker(ms);
+      setLoading(false);
     };
 
     run().catch(() => {
+      setLoading(false);
       setError(true);
     });
   }, []);
+
+  if (loading) return null;
 
   if (error) {
     return (
