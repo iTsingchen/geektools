@@ -15,12 +15,12 @@ class ServiceWorkerChecker {
     this.broadcast.addEventListener("message", this.handleMessage);
   }
 
-  check = () => {
+  check = (ms: number) => {
     return new Promise<void>((resolve, reject) => {
       this.resolve = resolve;
       this.reject = reject;
 
-      this.timer = this.startPolling();
+      this.timer = this.startPolling(ms);
     });
   };
 
@@ -31,11 +31,12 @@ class ServiceWorkerChecker {
     if (this.resolve) this.resolve();
   };
 
-  startPolling = () => {
+  startPolling = (ms: number) => {
     const startTime = Date.now();
+
     return setInterval(() => {
       this.broadcast.postMessage({ type: PING });
-      if (Date.now() - startTime >= 1000) {
+      if (Date.now() - startTime >= ms) {
         if (this.timer) clearInterval(this.timer);
         if (this.reject) {
           this.reject(
@@ -43,11 +44,11 @@ class ServiceWorkerChecker {
           );
         }
       }
-    }, 10);
+    }, 50);
   };
 }
 
-export const pingServiceWorker = () => {
+export const pingServiceWorker = (ms: number) => {
   const checker = new ServiceWorkerChecker();
-  return checker.check();
+  return checker.check(ms);
 };

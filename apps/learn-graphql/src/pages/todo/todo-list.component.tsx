@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
 import { useTransition, animated } from "@react-spring/web";
-import { List as Loading } from "react-content-loader";
 
 import { Todo } from "../../apollo";
 
@@ -19,7 +18,7 @@ export function TodoList() {
     enter: { height: 52, opacity: 1 },
   });
 
-  if (loading) return <Loading className="mx-auto" />;
+  if (loading) return null;
 
   return (
     <ul className="mt-4">
