@@ -9,13 +9,22 @@ export const QUERY_TODOS = gql`
     }
   }
 `;
+export const QUERY_TODOS_PARTIAL = gql`
+  query Todos {
+    todos {
+      id
+      text
+      done
+    }
+  }
+`;
 
 export const CREATE_TODO = gql`
   mutation CreateTodo($text: String!) {
     createTodo(text: $text) {
       id
-      # text
-      # done
+      text
+      done
     }
   }
 `;
@@ -24,7 +33,7 @@ export const TOGGLE_TODO = gql`
   mutation ToggleTodo($id: ID!) {
     toggleTodo(id: $id) {
       id
-      # done
+      done
     }
   }
 `;

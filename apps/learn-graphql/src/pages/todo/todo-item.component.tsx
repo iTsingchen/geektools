@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, Reference } from "@apollo/client";
 import { XIcon } from "@heroicons/react/solid";
 
 import { Todo } from "../../apollo";
@@ -6,7 +6,18 @@ import { DELETE_TODO, TOGGLE_TODO } from "./todo.graphql";
 
 export function TodoItem({ id, text, done }: Todo) {
   const [toggleTodo] = useMutation(TOGGLE_TODO, { variables: { id } });
-  const [deleteTodo] = useMutation(DELETE_TODO, { variables: { id } });
+  const [deleteTodo] = useMutation<{ deleteTodo: { id: string } }>(
+    DELETE_TODO,
+    {
+      variables: { id },
+      update: (cache, { data }) => {
+        if (data) {
+          cache.evict({ id: cache.identify(data.deleteTodo) });
+          cache.gc();
+        }
+      },
+    }
+  );
 
   return (
     <p className="group flex py-2 px-4 justify-between">

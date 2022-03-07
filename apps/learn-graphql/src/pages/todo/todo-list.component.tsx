@@ -7,9 +7,7 @@ import { QUERY_TODOS } from "./todo.graphql";
 import { TodoItem } from "./todo-item.component";
 
 export function TodoList() {
-  const { loading, data } = useQuery<{ todos: Todo[] }>(QUERY_TODOS, {
-    // pollInterval: 200,
-  });
+  const { loading, data } = useQuery<{ todos: Todo[] }>(QUERY_TODOS);
 
   const transitions = useTransition(data?.todos ?? [], {
     keys: (item: Todo) => item.id,

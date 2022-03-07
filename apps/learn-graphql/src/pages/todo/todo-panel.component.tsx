@@ -2,12 +2,19 @@ import { useLazyQuery } from "@apollo/client";
 
 import { Todo } from "../../apollo";
 
-import { QUERY_TODOS } from "./todo.graphql";
+import { QUERY_TODOS_PARTIAL } from "./todo.graphql";
 import { FormInput } from "./form-input.component";
 import { TodoList } from "./todo-list.component";
 
 export function TodoPanel() {
-  const [query] = useLazyQuery<{ todos: Todo[] }>(QUERY_TODOS);
+  const [query, { data }] = useLazyQuery<{ todos: Todo[] }>(
+    QUERY_TODOS_PARTIAL,
+    {
+      fetchPolicy: "cache-only",
+    }
+  );
+
+  console.log(data);
 
   return (
     <div className="h-full">
